@@ -41,7 +41,7 @@ class CommunityController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show(Community $community) {
-        //
+        return view('community.show');
     }
 
     /**
