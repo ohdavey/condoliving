@@ -20,9 +20,9 @@ class CreateCommunitiesTable extends Migration
             $table->string('name');
             $table->string('address');
             $table->string('city');
-            $table->string('state');
-            $table->string('postal_code');
-            $table->string('country');
+            $table->string('state',2);
+            $table->string('postcode', 5);
+            $table->string('country',3);
             $table->text('description');
             $table->timestamps();
         });

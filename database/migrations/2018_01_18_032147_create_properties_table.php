@@ -19,13 +19,15 @@ class CreatePropertiesTable extends Migration
             $table->integer('community_id');
             $table->string('address');
             $table->string('unit');
-            $table->string('beds');
-            $table->string('baths');
+            $table->integer('beds');
+            $table->integer('baths');
             $table->integer('sqft');
+            $table->integer('year_built');
+            $table->integer('parking');
             $table->float('price', 8, 2);
             $table->text('body');
             $table->string('type');
-            $table->string('status');
+            $table->integer('status');
             $table->timestamps();
         });
     }

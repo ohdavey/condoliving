@@ -10,11 +10,11 @@ $factory->define(App\Community::class, function (Faker $faker) {
 //        'category_id' => function () {
 //            return factory('App\Category')->create()->id;
 //        },
-        'category_id' => $faker->buildingNumber,
+        'category_id' => $faker->numberBetween(1, 4),
         'name' => $faker->company,
         'address' => $faker->address,
         'city' => $faker->city,
-        'state' => $faker->locale,
+        'state' => $faker->stateAbbr,
         'postal_code' => $faker->postcode,
         'country' => $faker->countryCode,
         'description' => $faker->paragraphs,
