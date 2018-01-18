@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Apartment;
+use App\property;
 use Illuminate\Http\Request;
 
-class ApartmentController extends Controller
+class PropertyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class ApartmentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Apartment  $apartment
+     * @param  \App\property  $property
      * @return \Illuminate\Http\Response
      */
-    public function show(Apartment $apartment)
+    public function show(property $property)
     {
         //
     }
@@ -52,10 +52,10 @@ class ApartmentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Apartment  $apartment
+     * @param  \App\property  $property
      * @return \Illuminate\Http\Response
      */
-    public function edit(Apartment $apartment)
+    public function edit(property $property)
     {
         //
     }
@@ -64,10 +64,10 @@ class ApartmentController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Apartment  $apartment
+     * @param  \App\property  $property
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Apartment $apartment)
+    public function update(Request $request, property $property)
     {
         //
     }
@@ -75,10 +75,10 @@ class ApartmentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Apartment  $apartment
+     * @param  \App\property  $property
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Apartment $apartment)
+    public function destroy(property $property)
     {
         //
     }

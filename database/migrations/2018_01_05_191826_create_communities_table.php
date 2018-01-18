@@ -15,6 +15,15 @@ class CreateCommunitiesTable extends Migration
     {
         Schema::create('communities', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('owner_id');
+            $table->unsignedInteger('category_id');
+            $table->string('name');
+            $table->string('address');
+            $table->string('city');
+            $table->string('state');
+            $table->string('postal_code');
+            $table->string('country');
+            $table->text('description');
             $table->timestamps();
         });
     }
