@@ -1,0 +1,34 @@
+.communities {
+  .page-header {
+    margin-top: 10px;
+  }
+  .card {
+    display: block;
+    padding: 0px;
+    margin-bottom: 22px;
+    line-height: 1.6;
+    background-color: #FFF;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    -webkit-transition: border .2s ease-in-out;
+    transition: border;
+
+    .card-img {
+
+      img {
+
+      }
+    }
+
+    .card-body {
+      padding: 5px 5px;
+      .card-title {
+      }
+    }
+    .card-footer {
+      padding: 5px 5px;
+      border-top: 1px solid #ddd;
+      -webkit-transition: border .2s ease-in-out;
+    }
+  }
+}
