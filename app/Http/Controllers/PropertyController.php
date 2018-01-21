@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\property;
+
+use App\Property;
 use Illuminate\Http\Request;
 
 class PropertyController extends Controller
@@ -41,10 +42,10 @@ class PropertyController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\property  $property
+     * @param  \App\Property  $property
      * @return \Illuminate\Http\Response
      */
-    public function show(property $property)
+    public function show(Property $property)
     {
         //
     }
@@ -52,10 +53,10 @@ class PropertyController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\property  $property
+     * @param  \App\Property  $property
      * @return \Illuminate\Http\Response
      */
-    public function edit(property $property)
+    public function edit(Property $property)
     {
         //
     }
@@ -64,10 +65,10 @@ class PropertyController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\property  $property
+     * @param  \App\Property  $property
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, property $property)
+    public function update(Request $request, Property $property)
     {
         //
     }
@@ -75,10 +76,10 @@ class PropertyController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\property  $property
+     * @param  \App\Property  $property
      * @return \Illuminate\Http\Response
      */
-    public function destroy(property $property)
+    public function destroy(Property $property)
     {
         //
     }
