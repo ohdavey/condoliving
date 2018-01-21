@@ -12,7 +12,10 @@ class CommunityController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return view('community.index');
+
+        $communities = Community::latest()->get();
+
+        return view('communities.index', compact('communities'));
     }
 
     /**
@@ -41,7 +44,7 @@ class CommunityController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show(Community $community) {
-        return view('community.show');
+        return view('communities.show', compact('community'));
     }
 
     /**
