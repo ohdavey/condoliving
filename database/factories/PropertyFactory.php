@@ -2,7 +2,8 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\property::class, function (Faker $faker) {
+
+$factory->define(App\Property::class, function (Faker $faker) {
     return [
         'owner_id' => function () {
             return factory('App\User')->create()->id;
@@ -10,10 +11,10 @@ $factory->define(App\property::class, function (Faker $faker) {
         'community_id' => function () {
             return factory('App\Category')->create()->id;
         },
-        'address' => $faker->address,
+        'address' => $faker->streetAddress,
         'unit' => $faker->buildingNumber,
-        'beds' => $faker->randomNumber(1, 1),
-        'baths' => $faker->randomNumber(1, 1),
+        'beds' => $faker->numberBetween(1, 5),
+        'baths' => $faker->numberBetween(1, 4),
         'sqft' => $faker->numberBetween(400, 2000),
         'price' => $faker->randomFloat(2, 400, 12000),
         'year_built' => $faker->year('now'),

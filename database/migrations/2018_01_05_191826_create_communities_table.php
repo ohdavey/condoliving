@@ -21,7 +21,7 @@ class CreateCommunitiesTable extends Migration
             $table->string('address');
             $table->string('city');
             $table->string('state',2);
-            $table->string('postcode', 5);
+            $table->string('postcode');
             $table->string('country',3);
             $table->text('description');
             $table->timestamps();
