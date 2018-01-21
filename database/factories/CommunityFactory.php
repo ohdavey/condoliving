@@ -12,12 +12,12 @@ $factory->define(App\Community::class, function (Faker $faker) {
 //        },
         'category_id' => $faker->numberBetween(1, 4),
         'name' => $faker->company,
-        'address' => $faker->address,
+        'address' => $faker->streetAddress,
         'city' => $faker->city,
         'state' => $faker->stateAbbr,
-        'postal_code' => $faker->postcode,
+        'postcode' => $faker->postcode,
         'country' => $faker->countryCode,
-        'description' => $faker->paragraphs,
+        'description' => $faker->text(200),
     ];
 
 });
