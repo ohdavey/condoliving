@@ -8,9 +8,10 @@ $factory->define(App\Property::class, function (Faker $faker) {
         'owner_id' => function () {
             return factory('App\User')->create()->id;
         },
-        'community_id' => function () {
-            return factory('App\Category')->create()->id;
-        },
+//        'community_id' => function () {
+//            return factory('App\Category')->create()->id;
+//        },
+        'community_id' => $faker->numberBetween(1, 4),
         'address' => $faker->streetAddress,
         'unit' => $faker->buildingNumber,
         'beds' => $faker->numberBetween(1, 5),
