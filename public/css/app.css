@@ -17,6 +17,27 @@
   transition: border;
 }
 
+.communities .card .card-preview {
+  position: relative;
+  display: block;
+}
+
+.communities .card .card-preview .card-title {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: table;
+  width: 100%;
+  margin: 0px;
+  bottom: 0;
+  padding: 5px 5px;
+}
+
+.communities .card .card-preview .property-count {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+}
+
 .communities .card .card-body {
   padding: 5px 5px;
 }
@@ -7144,7 +7165,7 @@ button.list-group-item-danger.active:focus {
 
 .panel-default > .panel-heading {
   color: #333333;
-  background-color: #fff;
+  background-color: #f5f5f5;
   border-color: #d3e0e9;
 }
 
@@ -7153,7 +7174,7 @@ button.list-group-item-danger.active:focus {
 }
 
 .panel-default > .panel-heading .badge {
-  color: #fff;
+  color: #f5f5f5;
   background-color: #333333;
 }
 

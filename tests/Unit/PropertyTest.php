@@ -2,19 +2,20 @@
 
 namespace Tests\Unit;
 
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class PropertyTest extends TestCase
 {
+    use DatabaseMigrations;
     /**
      * A basic test example.
      *
      * @return void
      */
-    public function testExample()
+    public function test_it_has_an_owner()
     {
-        $this->assertTrue(true);
+        $property = factory('App\Property')->create();
+        $this->assertInstanceOf('App\User', $property->owner);
     }
 }
