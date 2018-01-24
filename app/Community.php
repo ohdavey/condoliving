@@ -20,7 +20,7 @@ class Community extends Model
      */
     public function path()
     {
-        return '/communities/' . $this->id;
+        return '/community/' . $this->id;
     }
 
     /**
