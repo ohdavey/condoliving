@@ -1,7 +1,10 @@
 .communities {
+  .page-header {
+    margin-top: 10px;
+  }
   .card {
     display: block;
-    padding: 4px;
+    padding: 0px;
     margin-bottom: 22px;
     line-height: 1.6;
     background-color: #FFF;
@@ -10,20 +13,37 @@
     -webkit-transition: border .2s ease-in-out;
     transition: border;
 
-    .card-img {
-
+    .card-preview {
+      position: relative;
+      display: block;
       img {
 
       }
-    }
-    .card-title {
+      .card-title {
+        position: absolute;
+        background-color: transparentize(black, .5);
+        display: table;
+        width: 100%;
+        margin: 0px;
+        bottom: 0;
+        padding: 5px 5px;
+      }
 
+      .property-count {
+        position: absolute;
+        top: 4px;
+        right: 4px;
+      }
     }
+
 
     .card-body {
-      .card-footer {
-
-      }
+      padding: 5px 5px;
+    }
+    .card-footer {
+      padding: 5px 5px;
+      border-top: 1px solid #ddd;
+      -webkit-transition: border .2s ease-in-out;
     }
   }
 }
