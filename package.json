@@ -15,6 +15,7 @@
         "font-awesome": "^4.7.0",
         "cross-env": "^5.1",
         "jquery": "^3.2",
+        "sass-globber": "^2.0",
         "laravel-mix": "^1.0",
         "lodash": "^4.17.4",
         "vue": "^2.5.7"
