@@ -56,9 +56,11 @@
                                         <span class="fa fa-star"></span>
                                     </div>
                                 </div>
+
                                 <p class="count"> <span class="label label-info">{{ count($community->properties) }}</span> Properties Available</p>
                                 <p class="description">{{ $community->description }}</p>
-                                <h4 class="price">Starting At: <span>${{ $community->properties[0]->price }}</span></h4>
+                                <h4 class="price">Starting At:
+                                    <span>${{$community->lowestPrice()}}</span></h4>
                                 <p class="address">
                                     <i class="fa fa-map-marker text-danger"></i> {{ $community->address }} <br>
                                     {{ $community->city }}, {{ $community->state }} {{ $community->postcode }}
@@ -84,7 +86,8 @@
                                 </a>
                                 <div class="card-body">
                                     <i class="fa fa-map-marker text-danger"></i> {{ $property->address }}, {{ $property->unit }}
-                                    <small class="text-muted pull-right">★ ★ ★ ★ ☆</small>
+                                    <small class="text-muted pull-right">{{
+                                    $property->price }}</small>
                                 </div>
                             </div>
                         </div>
