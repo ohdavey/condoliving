@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Community;
 use App\Property;
 use Illuminate\Http\Request;
 
@@ -45,9 +46,10 @@ class PropertyController extends Controller
      * @param  \App\Property  $property
      * @return \Illuminate\Http\Response
      */
-    public function show(Property $property)
+    public function show(Community $community, Property $property)
     {
-        //
+        dd($property);
+        return view('property.show', compact('property'));
     }
 
     /**

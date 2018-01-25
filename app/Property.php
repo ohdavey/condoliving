@@ -18,6 +18,16 @@ class Property extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
+    public function community()
+    {
+        return $this->belongsTo(Community::class, 'community_id');
+    }
+
+    /**
+     * A Property has an owner.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function owner()
     {
         return $this->belongsTo(User::class, 'owner_id');
@@ -25,6 +35,6 @@ class Property extends Model
 
     public function path()
     {
-        return "property/{$this->id}";
+        return "/community/{$this->community_id}/property/{$this->id}";
     }
 }

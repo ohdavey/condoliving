@@ -19,4 +19,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/communities', 'CommunityController@index');
-Route::get('/communities/{community}', 'CommunityController@show');
+Route::get('/community/{community}', 'CommunityController@show');
+Route::get('/community/{community}/property/{property}', 'PropertyController@show');
