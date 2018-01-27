@@ -3,7 +3,7 @@
 @section('content')
     <div class="container property">
         <h2 class="page-header">
-            {{ $property->address }} <span class="pull-right label label-info">{{ $property->getStatusOptions }}</span>
+            {{ $property->address }} <span class="pull-right label label-info">{{ $property->statusText() }}</span>
         </h2>
         <div class="row">
             <div class="col-md-7">
@@ -53,23 +53,26 @@
 
                 <div class="row">
                     <div class="col-sm-6">
-                        <i class="fa fa-fw fa-bed"></i> {{ $property->beds }} Bedroom
+                        <i class="fa fa-fw fa-1x fa-bed"></i> {{ $property->beds }} Bedroom
                     </div>
                     <div class="col-sm-6">
-                        <i class="fa fa-fw fa-bath"></i> {{ $property->baths }} Bathroom
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <i class="fa fa-fw fa-minus-square-o"></i> {{ $property->sqft}} Sqft.
-                    </div>
-                    <div class="col-sm-6">
-                        <i class="fa fa-fw fa-car"></i> {{ $property->parking }} Car Garage
+                        <i class="fa fa-fw fa-1x fa-bath"></i> {{ $property->baths }} Bathroom
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
-                        <i class="fa fa-fw fa-calendar-o"></i> Built {{ $property->year_built}}
+                        <i class="fa fa-fw fa-1x fa-minus-square-o"></i> {{ $property->sqft}} Sqft.
+                    </div>
+                    <div class="col-sm-6">
+                        <i class="fa fa-fw fa-1x fa-car"></i> {{ $property->parking }} Car Garage
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <i class="fa fa-fw fa-1x fa-calendar-o"></i> Built {{ $property->year_built}}
+                    </div>
+                    <div class="col-sm-6">
+                        <i class="fa fa-fw fa-1x fa-home"></i> {{ $property->type}}
                     </div>
                 </div>
 

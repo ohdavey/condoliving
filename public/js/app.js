@@ -299,7 +299,7 @@ function forEach(obj, fn) {
 
 /**
  * Accepts varargs expecting each argument to be an object, then
- * immutably merges the property of each object and returns result.
+ * immutably merges the properties of each object and returns result.
  *
  * When multiple objects contain the same key the later object in
  * the arguments list will take precedence.
@@ -312,7 +312,7 @@ function forEach(obj, fn) {
  * ```
  *
  * @param {Object} obj1 Object to merge
- * @returns {Object} Result of all merge property
+ * @returns {Object} Result of all merge properties
  */
 function merge(/* obj1, obj2, obj3, ... */) {
   var result = {};
@@ -331,10 +331,10 @@ function merge(/* obj1, obj2, obj3, ... */) {
 }
 
 /**
- * Extends object a by mutably adding to it the property of object b.
+ * Extends object a by mutably adding to it the properties of object b.
  *
  * @param {Object} a The object to be extended
- * @param {Object} b The object to copy property from
+ * @param {Object} b The object to copy properties from
  * @param {Object} thisArg The object to bind function to
  * @return {Object} The resulting value of object a
  */
@@ -1338,7 +1338,7 @@ if (token) {
   /** Used to detect strings that need a more robust regexp to match words. */
   var reHasUnicodeWord = /[a-z][A-Z]|[A-Z]{2,}[a-z]|[0-9][a-zA-Z]|[a-zA-Z][0-9]|[^a-zA-Z0-9 ]/;
 
-  /** Used to assign default `context` object property. */
+  /** Used to assign default `context` object properties. */
   var contextProps = [
     'Array', 'Buffer', 'DataView', 'Date', 'Error', 'Float32Array', 'Float64Array',
     'Function', 'Int8Array', 'Int16Array', 'Int32Array', 'Map', 'Math', 'Object',
@@ -2508,7 +2508,7 @@ if (token) {
     /** Used to resolve the decompiled source of functions. */
     var funcToString = funcProto.toString;
 
-    /** Used to check objects for own property. */
+    /** Used to check objects for own properties. */
     var hasOwnProperty = objectProto.hasOwnProperty;
 
     /** Used to generate unique IDs. */
@@ -2739,7 +2739,7 @@ if (token) {
 
     /**
      * The base implementation of `_.create` without support for assigning
-     * property to the created object.
+     * properties to the created object.
      *
      * @private
      * @param {Object} proto The object to inherit from.
@@ -3474,11 +3474,11 @@ if (token) {
             !(skipIndexes && (
                // Safari 9 has enumerable `arguments.length` in strict mode.
                key == 'length' ||
-               // Node.js 0.10 has enumerable non-index property on buffers.
+               // Node.js 0.10 has enumerable non-index properties on buffers.
                (isBuff && (key == 'offset' || key == 'parent')) ||
-               // PhantomJS 2 has enumerable non-index property on typed arrays.
+               // PhantomJS 2 has enumerable non-index properties on typed arrays.
                (isType && (key == 'buffer' || key == 'byteLength' || key == 'byteOffset')) ||
-               // Skip index property.
+               // Skip index properties.
                isIndex(key, length)
             ))) {
           result.push(key);
@@ -3689,7 +3689,7 @@ if (token) {
      * @param {*} value The value to clone.
      * @param {boolean} bitmask The bitmask flags.
      *  1 - Deep clone
-     *  2 - Flatten inherited property
+     *  2 - Flatten inherited properties
      *  4 - Clone symbols
      * @param {Function} [customizer] The function to customize cloning.
      * @param {string} [key] The key of `value`.
@@ -4025,7 +4025,7 @@ if (token) {
 
     /**
      * The base implementation of `baseForOwn` which iterates over `object`
-     * property returned by `keysFunc` and invokes `iteratee` for each property.
+     * properties returned by `keysFunc` and invokes `iteratee` for each property.
      * Iteratee functions may exit iteration early by explicitly returning `false`.
      *
      * @private
@@ -4037,7 +4037,7 @@ if (token) {
     var baseFor = createBaseFor();
 
     /**
-     * This function is like `baseFor` except that it iterates over property
+     * This function is like `baseFor` except that it iterates over properties
      * in the opposite order.
      *
      * @private
@@ -5714,7 +5714,7 @@ if (token) {
     }
 
     /**
-     * Used by `_.orderBy` to compare multiple property of a value to another
+     * Used by `_.orderBy` to compare multiple properties of a value to another
      * and stable sort them.
      *
      * If `orders` is unspecified, all values are sorted in ascending order. Otherwise,
@@ -5846,12 +5846,12 @@ if (token) {
     }
 
     /**
-     * Copies property of `source` to `object`.
+     * Copies properties of `source` to `object`.
      *
      * @private
-     * @param {Object} source The object to copy property from.
+     * @param {Object} source The object to copy properties from.
      * @param {Array} props The property identifiers to copy.
-     * @param {Object} [object={}] The object to copy property to.
+     * @param {Object} [object={}] The object to copy properties to.
      * @param {Function} [customizer] The function to customize copied values.
      * @returns {Object} Returns `object`.
      */
@@ -6639,8 +6639,8 @@ if (token) {
     }
 
     /**
-     * Used by `_.defaults` to customize its `_.assignIn` use to assign property
-     * of source objects to the destination object for all destination property
+     * Used by `_.defaults` to customize its `_.assignIn` use to assign properties
+     * of source objects to the destination object for all destination properties
      * that resolve to `undefined`.
      *
      * @private
@@ -6728,7 +6728,7 @@ if (token) {
       stack.set(array, other);
       stack.set(other, array);
 
-      // Ignore non-index property.
+      // Ignore non-index properties.
       while (++index < arrLength) {
         var arrValue = array[index],
             othValue = other[index];
@@ -7211,7 +7211,7 @@ if (token) {
      * @private
      * @param {Object} object The object to query.
      * @param {Array|string} path The path to check.
-     * @param {Function} hasFunc The function to check property.
+     * @param {Function} hasFunc The function to check properties.
      * @returns {boolean} Returns `true` if `path` exists, else `false`.
      */
     function hasPath(object, path, hasFunc) {
@@ -7247,7 +7247,7 @@ if (token) {
       var length = array.length,
           result = array.constructor(length);
 
-      // Add property assigned by `RegExp#exec`.
+      // Add properties assigned by `RegExp#exec`.
       if (length && typeof array[0] == 'string' && hasOwnProperty.call(array, 'index')) {
         result.index = array.index;
         result.input = array.input;
@@ -7603,7 +7603,7 @@ if (token) {
     /**
      * This function is like
      * [`Object.keys`](http://ecma-international.org/ecma-262/7.0/#sec-object.keys)
-     * except that it includes inherited enumerable property.
+     * except that it includes inherited enumerable properties.
      *
      * @private
      * @param {Object} object The object to query.
@@ -10896,7 +10896,7 @@ if (token) {
 
     /**
      * Gets the size of `collection` by returning its length for array-like
-     * values or the number of own enumerable string keyed property for objects.
+     * values or the number of own enumerable string keyed properties for objects.
      *
      * @static
      * @memberOf _
@@ -12080,7 +12080,7 @@ if (token) {
      * [structured clone algorithm](https://mdn.io/Structured_clone_algorithm)
      * and supports cloning arrays, array buffers, booleans, date objects, maps,
      * numbers, `Object` objects, regexes, sets, strings, symbols, and typed
-     * arrays. The own enumerable property of `arguments` objects are cloned
+     * arrays. The own enumerable properties of `arguments` objects are cloned
      * as plain objects. An empty object is returned for uncloneable values such
      * as error objects, functions, DOM nodes, and WeakMaps.
      *
@@ -12196,7 +12196,7 @@ if (token) {
 
     /**
      * Checks if `object` conforms to `source` by invoking the predicate
-     * property of `source` with the corresponding property values of `object`.
+     * properties of `source` with the corresponding property values of `object`.
      *
      * **Note:** This method is equivalent to `_.conforms` when `source` is
      * partially applied.
@@ -12520,7 +12520,7 @@ if (token) {
      * Checks if `value` is an empty object, collection, map, or set.
      *
      * Objects are considered empty if they have no own enumerable string keyed
-     * property.
+     * properties.
      *
      * Array-like values such as `arguments` objects, arrays, buffers, strings, or
      * jQuery-like collections are considered empty if they have a `length` of `0`.
@@ -12580,7 +12580,7 @@ if (token) {
      * **Note:** This method supports comparing arrays, array buffers, booleans,
      * date objects, error objects, maps, numbers, `Object` objects, regexes,
      * sets, strings, symbols, and typed arrays. `Object` objects are compared
-     * by their own, not inherited, enumerable property. Functions and DOM
+     * by their own, not inherited, enumerable properties. Functions and DOM
      * nodes are compared by strict equality, i.e. `===`.
      *
      * @static
@@ -13550,7 +13550,7 @@ if (token) {
 
     /**
      * Converts `value` to a plain object flattening inherited enumerable string
-     * keyed property of `value` to own property of the plain object.
+     * keyed properties of `value` to own properties of the plain object.
      *
      * @static
      * @memberOf _
@@ -13634,7 +13634,7 @@ if (token) {
     /*------------------------------------------------------------------------*/
 
     /**
-     * Assigns own enumerable string keyed property of source objects to the
+     * Assigns own enumerable string keyed properties of source objects to the
      * destination object. Source objects are applied from left to right.
      * Subsequent sources overwrite property assignments of previous sources.
      *
@@ -13679,7 +13679,7 @@ if (token) {
 
     /**
      * This method is like `_.assign` except that it iterates over own and
-     * inherited source property.
+     * inherited source properties.
      *
      * **Note:** This method mutates `object`.
      *
@@ -13798,7 +13798,7 @@ if (token) {
 
     /**
      * Creates an object that inherits from the `prototype` object. If a
-     * `property` object is given, its own enumerable string keyed property
+     * `properties` object is given, its own enumerable string keyed properties
      * are assigned to the created object.
      *
      * @static
@@ -13806,7 +13806,7 @@ if (token) {
      * @since 2.3.0
      * @category Object
      * @param {Object} prototype The object to inherit from.
-     * @param {Object} [properties] The property to assign to the object.
+     * @param {Object} [properties] The properties to assign to the object.
      * @returns {Object} Returns the new object.
      * @example
      *
@@ -13836,8 +13836,8 @@ if (token) {
     }
 
     /**
-     * Assigns own and inherited enumerable string keyed property of source
-     * objects to the destination object for all destination property that
+     * Assigns own and inherited enumerable string keyed properties of source
+     * objects to the destination object for all destination properties that
      * resolve to `undefined`. Source objects are applied from left to right.
      * Once a property is set, additional values of the same property are ignored.
      *
@@ -13863,7 +13863,7 @@ if (token) {
 
     /**
      * This method is like `_.defaults` except that it recursively assigns
-     * default property.
+     * default properties.
      *
      * **Note:** This method mutates `object`.
      *
@@ -13964,7 +13964,7 @@ if (token) {
     }
 
     /**
-     * Iterates over own and inherited enumerable string keyed property of an
+     * Iterates over own and inherited enumerable string keyed properties of an
      * object and invokes `iteratee` for each property. The iteratee is invoked
      * with three arguments: (value, key, object). Iteratee functions may exit
      * iteration early by explicitly returning `false`.
@@ -13998,7 +13998,7 @@ if (token) {
     }
 
     /**
-     * This method is like `_.forIn` except that it iterates over property of
+     * This method is like `_.forIn` except that it iterates over properties of
      * `object` in the opposite order.
      *
      * @static
@@ -14030,7 +14030,7 @@ if (token) {
     }
 
     /**
-     * Iterates over own enumerable string keyed property of an object and
+     * Iterates over own enumerable string keyed properties of an object and
      * invokes `iteratee` for each property. The iteratee is invoked with three
      * arguments: (value, key, object). Iteratee functions may exit iteration
      * early by explicitly returning `false`.
@@ -14062,7 +14062,7 @@ if (token) {
     }
 
     /**
-     * This method is like `_.forOwn` except that it iterates over property of
+     * This method is like `_.forOwn` except that it iterates over properties of
      * `object` in the opposite order.
      *
      * @static
@@ -14092,7 +14092,7 @@ if (token) {
     }
 
     /**
-     * Creates an array of function property names from own enumerable property
+     * Creates an array of function property names from own enumerable properties
      * of `object`.
      *
      * @static
@@ -14120,7 +14120,7 @@ if (token) {
 
     /**
      * Creates an array of function property names from own and inherited
-     * enumerable property of `object`.
+     * enumerable properties of `object`.
      *
      * @static
      * @memberOf _
@@ -14442,9 +14442,9 @@ if (token) {
 
     /**
      * This method is like `_.assign` except that it recursively merges own and
-     * inherited enumerable string keyed property of source objects into the
-     * destination object. Source property that resolve to `undefined` are
-     * skipped if a destination value exists. Array and plain object property
+     * inherited enumerable string keyed properties of source objects into the
+     * destination object. Source properties that resolve to `undefined` are
+     * skipped if a destination value exists. Array and plain object properties
      * are merged recursively. Other objects and value types are overridden by
      * assignment. Source objects are applied from left to right. Subsequent
      * sources overwrite property assignments of previous sources.
@@ -14478,7 +14478,7 @@ if (token) {
     /**
      * This method is like `_.merge` except that it accepts `customizer` which
      * is invoked to produce the merged values of the destination and source
-     * property. If `customizer` returns `undefined`, merging is handled by the
+     * properties. If `customizer` returns `undefined`, merging is handled by the
      * method instead. The `customizer` is invoked with six arguments:
      * (objValue, srcValue, key, object, source, stack).
      *
@@ -14554,7 +14554,7 @@ if (token) {
 
     /**
      * The opposite of `_.pickBy`; this method creates an object composed of
-     * the own and inherited enumerable string keyed property of `object` that
+     * the own and inherited enumerable string keyed properties of `object` that
      * `predicate` doesn't return truthy for. The predicate is invoked with two
      * arguments: (value, key).
      *
@@ -14577,7 +14577,7 @@ if (token) {
     }
 
     /**
-     * Creates an object composed of the picked `object` property.
+     * Creates an object composed of the picked `object` properties.
      *
      * @static
      * @since 0.1.0
@@ -14598,7 +14598,7 @@ if (token) {
     });
 
     /**
-     * Creates an object composed of the `object` property `predicate` returns
+     * Creates an object composed of the `object` properties `predicate` returns
      * truthy for. The predicate is invoked with two arguments: (value, key).
      *
      * @static
@@ -14681,8 +14681,8 @@ if (token) {
 
     /**
      * Sets the value at `path` of `object`. If a portion of `path` doesn't exist,
-     * it's created. Arrays are created for missing index property while objects
-     * are created for all other missing property. Use `_.setWith` to customize
+     * it's created. Arrays are created for missing index properties while objects
+     * are created for all other missing properties. Use `_.setWith` to customize
      * `path` creation.
      *
      * **Note:** This method mutates `object`.
@@ -14795,7 +14795,7 @@ if (token) {
     /**
      * An alternative to `_.reduce`; this method transforms `object` to a new
      * `accumulator` object which is the result of running each of its own
-     * enumerable string keyed property thru `iteratee`, with each invocation
+     * enumerable string keyed properties thru `iteratee`, with each invocation
      * potentially mutating the `accumulator` object. If `accumulator` is not
      * provided, a new object with the same `[[Prototype]]` will be used. The
      * iteratee is invoked with four arguments: (accumulator, value, key, object).
@@ -15701,10 +15701,10 @@ if (token) {
     }
 
     /**
-     * Creates a compiled template function that can interpolate data property
-     * in "interpolate" delimiters, HTML-escape interpolated data property in
+     * Creates a compiled template function that can interpolate data properties
+     * in "interpolate" delimiters, HTML-escape interpolated data properties in
      * "escape" delimiters, and execute JavaScript in "evaluate" delimiters. Data
-     * property may be accessed as free variables in the template. If a setting
+     * properties may be accessed as free variables in the template. If a setting
      * object is given, it takes precedence over `_.templateSettings` values.
      *
      * **Note:** In the development build `_.template` utilizes
@@ -16375,7 +16375,7 @@ if (token) {
     }
 
     /**
-     * Creates a function that invokes the predicate property of `source` with
+     * Creates a function that invokes the predicate properties of `source` with
      * the corresponding property values of a given object, returning `true` if
      * all predicates return truthy, else `false`.
      *
@@ -16523,7 +16523,7 @@ if (token) {
      * function. If `func` is a property name, the created function returns the
      * property value for a given element. If `func` is an array or object, the
      * created function returns `true` for elements that contain the equivalent
-     * source property, otherwise it returns `false`.
+     * source properties, otherwise it returns `false`.
      *
      * @static
      * @since 4.0.0
@@ -16686,7 +16686,7 @@ if (token) {
     });
 
     /**
-     * Adds all own enumerable string keyed function property of a source
+     * Adds all own enumerable string keyed function properties of a source
      * object to the destination object. If `object` is a function, then methods
      * are added to its prototype as well.
      *
@@ -18645,7 +18645,7 @@ jQuery.extend( {
 	guid: 1,
 
 	// jQuery.support is not used in Core but other projects attach their
-	// property to it so it needs to exist.
+	// properties to it so it needs to exist.
 	support: support
 } );
 
@@ -19034,7 +19034,7 @@ function createCache() {
 	var keys = [];
 
 	function cache( key, value ) {
-		// Use (key + " ") to avoid collision with native prototype property (see Issue #157)
+		// Use (key + " ") to avoid collision with native prototype properties (see Issue #157)
 		if ( keys.push( key + " " ) > Expr.cacheLength ) {
 			// Only keep the most recent entries
 			delete cache[ keys.shift() ];
@@ -19278,7 +19278,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 	---------------------------------------------------------------------- */
 
 	// Support: IE<8
-	// Verify that getAttribute really returns attributes and not property
+	// Verify that getAttribute really returns attributes and not properties
 	// (excepting IE8 booleans)
 	support.attributes = assert(function( el ) {
 		el.className = "i";
@@ -19698,7 +19698,7 @@ Sizzle.attr = function( elem, name ) {
 	}
 
 	var fn = Expr.attrHandle[ name.toLowerCase() ],
-		// Don't get fooled by Object.prototype property (jQuery #13807)
+		// Don't get fooled by Object.prototype properties (jQuery #13807)
 		val = fn && hasOwn.call( Expr.attrHandle, name.toLowerCase() ) ?
 			fn( elem, name, !documentIsHTML ) :
 			undefined;
@@ -20182,7 +20182,7 @@ Expr = Sizzle.selectors = {
 			return elem === document.activeElement && (!document.hasFocus || document.hasFocus()) && !!(elem.type || elem.href || ~elem.tabIndex);
 		},
 
-		// Boolean property
+		// Boolean properties
 		"enabled": createDisabledPseudo( false ),
 		"disabled": createDisabledPseudo( true ),
 
@@ -20665,7 +20665,7 @@ function matcherFromGroupMatchers( elementMatchers, setMatchers ) {
 
 			// Add elements passing elementMatchers directly to results
 			// Support: IE<9, Safari
-			// Tolerate NodeList property (IE: "length"; Safari: <number>) matching elements by id
+			// Tolerate NodeList properties (IE: "length"; Safari: <number>) matching elements by id
 			for ( ; i !== len && (elem = elems[i]) != null; i++ ) {
 				if ( byElement && elem ) {
 					j = 0;
@@ -22230,10 +22230,10 @@ Data.prototype = {
 		if ( typeof data === "string" ) {
 			cache[ camelCase( data ) ] = value;
 
-		// Handle: [ owner, { property } ] args
+		// Handle: [ owner, { properties } ] args
 		} else {
 
-			// Copy the property one-by-one to the cache object
+			// Copy the properties one-by-one to the cache object
 			for ( prop in data ) {
 				cache[ camelCase( prop ) ] = data[ prop ];
 			}
@@ -22269,7 +22269,7 @@ Data.prototype = {
 		// When the key is not a string, or both a key and value
 		// are specified, set or extend (existing objects) with either:
 		//
-		//   1. An object of property
+		//   1. An object of properties
 		//   2. A key and value
 		//
 		this.set( owner, key, value );
@@ -22315,7 +22315,7 @@ Data.prototype = {
 		if ( key === undefined || jQuery.isEmptyObject( cache ) ) {
 
 			// Support: Chrome <=35 - 45
-			// Webkit & Blink performance suffers when deleting property
+			// Webkit & Blink performance suffers when deleting properties
 			// from DOM nodes, so set to undefined instead
 			// https://bugs.chromium.org/p/chromium/issues/detail?id=378607 (bug restricted)
 			if ( owner.nodeType ) {
@@ -22343,7 +22343,7 @@ var dataUser = new Data();
 //		paths to a single mechanism.
 //	3. Use the same single mechanism to support "private" and "user" data.
 //	4. _Never_ expose "private" data to user code (TODO: Drop _data, _removeData)
-//	5. Avoid exposing implementation details on user objects (eg. expando property)
+//	5. Avoid exposing implementation details on user objects (eg. expando properties)
 //	6. Provide a clear path for implementation upgrade to WeakMap in 2014
 
 var rbrace = /^(?:\{[\w\W]*\}|\[[\w\W]*\])$/,
@@ -22731,7 +22731,7 @@ function adjustCSS( elem, prop, valueParts, tween ) {
 		initialInUnit = initialInUnit * 2;
 		jQuery.style( elem, prop, initialInUnit + unit );
 
-		// Make sure we update the tween property later on
+		// Make sure we update the tween properties later on
 		valueParts = valueParts || [];
 	}
 
@@ -23409,7 +23409,7 @@ jQuery.event = {
 					for ( i = 0; i < delegateCount; i++ ) {
 						handleObj = handlers[ i ];
 
-						// Don't conflict with Object.prototype property (#13203)
+						// Don't conflict with Object.prototype properties (#13203)
 						sel = handleObj.selector + " ";
 
 						if ( matchedSelectors[ sel ] === undefined ) {
@@ -23556,7 +23556,7 @@ jQuery.Event = function( src, props ) {
 			returnTrue :
 			returnFalse;
 
-		// Create target property
+		// Create target properties
 		// Support: Safari <=6 - 7 only
 		// Target should not be a text node (#504, #13143)
 		this.target = ( src.target && src.target.nodeType === 3 ) ?
@@ -23571,7 +23571,7 @@ jQuery.Event = function( src, props ) {
 		this.type = src;
 	}
 
-	// Put explicitly provided property onto the event object
+	// Put explicitly provided properties onto the event object
 	if ( props ) {
 		jQuery.extend( this, props );
 	}
@@ -24595,7 +24595,7 @@ jQuery.extend( {
 		}
 	},
 
-	// Don't automatically add "px" to these possibly-unitless property
+	// Don't automatically add "px" to these possibly-unitless properties
 	cssNumber: {
 		"animationIterationCount": true,
 		"columnCount": true,
@@ -24612,7 +24612,7 @@ jQuery.extend( {
 		"zoom": true
 	},
 
-	// Add in property whose names you wish to fix before
+	// Add in properties whose names you wish to fix before
 	// setting or getting the value
 	cssProps: {},
 
@@ -24657,7 +24657,7 @@ jQuery.extend( {
 				return;
 			}
 
-			// If a number was passed in, add the unit (except for certain CSS property)
+			// If a number was passed in, add the unit (except for certain CSS properties)
 			if ( type === "number" ) {
 				value += ret && ret[ 3 ] || ( jQuery.cssNumber[ origName ] ? "" : "px" );
 			}
@@ -24804,7 +24804,7 @@ jQuery.cssHooks.marginLeft = addGetHookIf( support.reliableMarginLeft,
 	}
 );
 
-// These hooks are used by animate to expand property
+// These hooks are used by animate to expand properties
 jQuery.each( {
 	margin: "",
 	padding: "",
@@ -24934,7 +24934,7 @@ Tween.propHooks = {
 
 			// Use step hook for back compat.
 			// Use cssHook if its there.
-			// Use .style if available and use plain property where available.
+			// Use .style if available and use plain properties where available.
 			if ( jQuery.fx.step[ tween.prop ] ) {
 				jQuery.fx.step[ tween.prop ]( tween );
 			} else if ( tween.elem.nodeType === 1 &&
@@ -25842,7 +25842,7 @@ jQuery.extend( {
 		var ret, hooks,
 			nType = elem.nodeType;
 
-		// Don't get/set property on text, comment and attribute nodes
+		// Don't get/set properties on text, comment and attribute nodes
 		if ( nType === 3 || nType === 8 || nType === 2 ) {
 			return;
 		}
@@ -31349,7 +31349,7 @@ module.exports = (
       var href = url;
 
       if (msie) {
-        // IE needs attribute set twice to normalize property
+        // IE needs attribute set twice to normalize properties
         urlParsingNode.setAttribute('href', href);
         href = urlParsingNode.href;
       }
@@ -32035,7 +32035,7 @@ function toArray (list, start) {
 }
 
 /**
- * Mix property into target object.
+ * Mix properties into target object.
  */
 function extend (to, _from) {
   for (var key in _from) {
@@ -32741,7 +32741,7 @@ function protoAugment (target, src, keys) {
 
 /**
  * Augment an target Object or Array by defining
- * hidden property.
+ * hidden properties.
  */
 /* istanbul ignore next */
 function copyAugment (target, src, keys) {
@@ -32855,7 +32855,7 @@ function set (target, key, val) {
   var ob = (target).__ob__;
   if (target._isVue || (ob && ob.vmCount)) {
     "development" !== 'production' && warn(
-      'Avoid adding reactive property to a Vue instance or its root $data ' +
+      'Avoid adding reactive properties to a Vue instance or its root $data ' +
       'at runtime - declare it upfront in the data option.'
     );
     return val
@@ -32880,7 +32880,7 @@ function del (target, key) {
   var ob = (target).__ob__;
   if (target._isVue || (ob && ob.vmCount)) {
     "development" !== 'production' && warn(
-      'Avoid deleting property on a Vue instance or its root $data ' +
+      'Avoid deleting properties on a Vue instance or its root $data ' +
       '- just set it to null.'
     );
     return
@@ -35219,7 +35219,7 @@ var computedWatcherOptions = { lazy: true };
 function initComputed (vm, computed) {
   // $flow-disable-line
   var watchers = vm._computedWatchers = Object.create(null);
-  // computed property are just getters during SSR
+  // computed properties are just getters during SSR
   var isSSR = isServerRendering();
 
   for (var key in computed) {
@@ -35242,8 +35242,8 @@ function initComputed (vm, computed) {
       );
     }
 
-    // component-defined computed property are already defined on the
-    // component prototype. We only need to define computed property defined
+    // component-defined computed properties are already defined on the
+    // component prototype. We only need to define computed properties defined
     // at instantiation here.
     if (!(key in vm)) {
       defineComputed(vm, key, userDef);
@@ -35374,7 +35374,7 @@ function stateMixin (Vue) {
     dataDef.set = function (newData) {
       warn(
         'Avoid replacing instance root $data. ' +
-        'Use nested data property instead.',
+        'Use nested data properties instead.',
         this
       );
     };
@@ -36560,7 +36560,7 @@ function initExtend (Vue) {
     );
     Sub['super'] = Super;
 
-    // For props and computed property, we define the proxy getters on
+    // For props and computed properties, we define the proxy getters on
     // the Vue instances at extension time, on the extended prototype. This
     // avoids Object.defineProperty calls for each instance created.
     if (Sub.options.props) {
@@ -39657,7 +39657,7 @@ var patch = createPatchFunction({ nodeOps: nodeOps, modules: modules });
 
 /**
  * Not type checking this file because flow doesn't like attaching
- * property to Elements.
+ * properties to Elements.
  */
 
 /* istanbul ignore if */
@@ -41963,7 +41963,7 @@ function genData$2 (el, state) {
   var data = '{';
 
   // directives first.
-  // directives may mutate the el's other property before they are generated.
+  // directives may mutate the el's other properties before they are generated.
   var dirs = genDirectives(el, state);
   if (dirs) { data += dirs + ','; }
 
