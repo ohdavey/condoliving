@@ -21,7 +21,7 @@ $factory->define(App\Property::class, function (Faker $faker) {
         'year_built' => $faker->year('now'),
         'parking' => $faker->numberBetween(0,3),
         'body' => $faker->paragraphs(3, true),
-        'type' => $faker->randomElement(array('Condo', 'Townhomes', 'Houses', 'Apartments', 'Manufactured')),
+        'type' => $faker->randomElement(array('Condo', 'Townhome', 'House', 'Apartment', 'Manufactured')),
         'status' => $faker->numberBetween(0, 3),
     ];
 });

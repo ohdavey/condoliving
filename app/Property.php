@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Property extends Model
 {
+    const STATUS_VACANT     = 0;
+    const STATUS_RENTED     = 1;
+    const STATUS_DEFAULT    = 2;
+    const STATUS_EVICTION   = 3;
     /**
      * Don't auto-apply mass assignment protection.
      *
@@ -38,4 +42,19 @@ class Property extends Model
         return "/community/{$this->community_id}/property/{$this->id}";
     }
 
+    public function statusOptions()
+    {
+        return array(
+            self::STATUS_VACANT   => 'Vacant',
+            self::STATUS_RENTED   => 'Rented',
+            self::STATUS_DEFAULT  => 'Default',
+            self::STATUS_EVICTION => 'Eviction',
+        );
+    }
+
+    public function statusText()
+    {
+        $options = $this->statusOptions();
+        return isset( $options[$this->status]) ? $options[$this->status] : "unknown ({$this->status})";
+    }
 }
