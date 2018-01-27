@@ -57,4 +57,24 @@ class Property extends Model
         $options = $this->statusOptions();
         return isset( $options[$this->status]) ? $options[$this->status] : "unknown ({$this->status})";
     }
+
+    /**
+     * A Property may have a tenant.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function tenant()
+    {
+        return $this->hasOne(Tenant::class);
+    }
+
+    /**
+     * A Property may have a lease.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function lease()
+    {
+        return $this->hasOne(Lease::class);
+    }
 }
