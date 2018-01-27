@@ -37,4 +37,5 @@ class Property extends Model
     {
         return "/community/{$this->community_id}/property/{$this->id}";
     }
+
 }

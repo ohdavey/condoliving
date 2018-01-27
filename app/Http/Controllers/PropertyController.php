@@ -48,8 +48,7 @@ class PropertyController extends Controller
      */
     public function show(Community $community, Property $property)
     {
-        dd($property);
-        return view('property.show', compact('property'));
+        return view('communities.property.show', compact('property'));
     }
 
     /**
