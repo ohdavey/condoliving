@@ -8,10 +8,9 @@ $factory->define(App\Property::class, function (Faker $faker) {
         'owner_id' => function () {
             return factory('App\User')->create()->id;
         },
-//        'community_id' => function () {
-//            return factory('App\Category')->create()->id;
-//        },
-        'community_id' => $faker->numberBetween(1, 4),
+        'community_id' => function () {
+            return factory('App\Community')->create()->id;
+        },
         'address' => $faker->streetAddress,
         'unit' => $faker->buildingNumber,
         'beds' => $faker->numberBetween(1, 5),
@@ -21,7 +20,7 @@ $factory->define(App\Property::class, function (Faker $faker) {
         'year_built' => $faker->year('now'),
         'parking' => $faker->numberBetween(0,3),
         'body' => $faker->paragraphs(3, true),
-        'type' => $faker->randomElement(array('Condo', 'Townhome', 'House', 'Apartment', 'Manufactured')),
+        'type' => $faker->randomElement(array('Condo', 'Townhouse', 'House', 'Apartment', 'Manufactured')),
         'status' => $faker->numberBetween(0, 3),
     ];
 });
