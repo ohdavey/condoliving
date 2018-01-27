@@ -20,8 +20,11 @@ $factory->define(App\Property::class, function (Faker $faker) {
         'price' => $faker->randomFloat(2, 400, 12000),
         'year_built' => $faker->year('now'),
         'parking' => $faker->numberBetween(0,3),
-        'body' => $faker->text(),
-        'type' => $faker->company,
+        'body' => $faker->paragraphs(3, true),
+        'type' => $faker->randomElement(array('Condo', 'Townhome', 'House', 'Apartment', 'Manufactured')),
         'status' => $faker->numberBetween(0, 3),
     ];
 });
+
+// $communities = factory('App\Community', 12)->create();
+// $communities->each(function ($community) { factory('App\Property', rand(3, 15))->create(['community_id' => $community->id]); });
