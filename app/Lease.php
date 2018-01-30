@@ -14,6 +14,23 @@ class Lease extends Model
     protected $guarded = [];
 
     /**
+     * The relationships to always eager-load.
+     *
+     * @var array
+     */
+    protected $with = ['creator', 'tenant', 'property'];
+
+    /**
+     * A thread belongs to a creator.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'creator_id');
+    }
+
+    /**
      * A Lease belongs to a tenant.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

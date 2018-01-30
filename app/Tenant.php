@@ -52,4 +52,23 @@ class Tenant extends Model
     {
         return $this->hasMany(Payment::class);
     }
+
+    public function lowestPrice()
+    {
+        foreach ($this->properties as $property)
+        {
+            $prices[] = $property->price;
+        }
+        return min($prices);
+    }
+
+    /**
+     * A Tenant may have many payments.
+     *
+     * @return string
+     */
+    public function status()
+    {
+        return $this->property->statusText();
+    }
 }
