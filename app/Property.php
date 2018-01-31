@@ -18,6 +18,15 @@ class Property extends Model
     protected $guarded = [];
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        //
+    ];
+
+    /**
      * A Property has an owner.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

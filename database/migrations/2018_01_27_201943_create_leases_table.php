@@ -29,7 +29,6 @@ class CreateLeasesTable extends Migration
             $table->text('notes');
             $table->integer('status');
             $table->timestamps();
-            $table->unique(['tenant_id', 'property_id']);
         });
     }
 

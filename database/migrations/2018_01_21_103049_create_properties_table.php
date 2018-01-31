@@ -28,6 +28,7 @@ class CreatePropertiesTable extends Migration
             $table->text('body');
             $table->string('type');
             $table->integer('status');
+            $table->unique(['address']);
             $table->timestamps();
         });
     }

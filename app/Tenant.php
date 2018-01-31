@@ -14,6 +14,15 @@ class Tenant extends Model
     protected $guarded = [];
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        //
+    ];
+
+    /**
      * A Tenant lives in a property.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

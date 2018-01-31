@@ -14,6 +14,15 @@ class Payment extends Model
     protected $guarded = [];
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        //
+    ];
+
+    /**
      * A Payment belongs to a tenant.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

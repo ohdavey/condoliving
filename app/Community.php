@@ -14,6 +14,15 @@ class Community extends Model
     protected $guarded = [];
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        //
+    ];
+
+    /**
      * Get a string path for the thread.
      *
      * @return string
