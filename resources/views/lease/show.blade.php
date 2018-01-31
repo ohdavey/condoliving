@@ -3,7 +3,8 @@
 @section('content')
     <div class="container property">
         <h2 class="page-header">
-            Lease for {{ $lease->tenant->first_name }} {{ $lease->tenant->last_name }}<span class="pull-right label label-info">{{ $lease->status }}</span>
+            Lease for {{ $lease->tenant->first_name }} {{ $lease->tenant->last_name }}<span
+                    class="pull-right label label-info">{{ $lease->status }}</span>
         </h2>
 
         <div class="panel panel-default">
@@ -11,7 +12,7 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div><strong>Start Date:</strong> {{ date('d-m-Y', strtotime($lease->start_date)) }}</div>
-                        <div><strong>Expiration Date:</strong> {{ date('d-m-Y', strtotime($lease->start_date)) }}</div>
+                        <div><strong>Expiration Date:</strong> {{ date('d-m-Y', strtotime($lease->end_date)) }}</div>
                         <div><strong>Monthly Rate:</strong> ${{ $lease->monthly_rate }}</div>
                         <div><strong>Deposit:</strong> ${{ $lease->deposit }}</div>
                         <div><strong>Late Fee:</strong> {{ ($lease->late_fee * 100) }}%</div>
@@ -44,9 +45,12 @@
                             <div class="col-sm-5">
                                 <div class="">
                                     <div class="thumbnail">
-                                        <img class="img-responsive img-circle img-thumbnail" src="https://picsum.photos/130/130/?person" alt="">
+                                        <img class="img-responsive img-circle img-thumbnail"
+                                             src="https://picsum.photos/130/130/?person" alt="">
                                         <div class="caption text-center">
-                                            <h3 class="panel-title"><strong>{{ $lease->tenant->first_name }} {{ $lease->tenant->last_name }}</strong></h3>
+                                            <h3 class="panel-title">
+                                                <strong>{{ $lease->tenant->first_name }} {{ $lease->tenant->last_name }}</strong>
+                                            </h3>
                                         </div>
                                     </div>
                                 </div>
@@ -98,16 +102,62 @@
                             </div>
                         </div>
 
-                        <h3><small>Price</small><br/><strong>${{ $lease->property->price }}</strong><small>/month</small></h3>
+                        <h3>
+                            <small>Price</small>
+                            <br/><strong>${{ $lease->property->price }}</strong>
+                            <small>/month</small>
+                        </h3>
 
                         <p>
                             <i class="fa fa-map-marker"></i>
                             {{ $lease->property->address }}<br>
-                            {{ $lease->property->community->city }}, {{ $lease->property->community->state }} {{ $lease->property->community->postcode }}
+                            {{ $lease->property->community->city }}
+                            , {{ $lease->property->community->state }} {{ $lease->property->community->postcode }}
                         </p>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading"><i class="fa fa-calendar"></i> Rent Logs</div>
+            <div class="panel-body">
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Month</th>
+                        <th>Rent</th>
+                        <th>Fee</th>
+                        <th>Balance</th>
+                        <th>Created At</th>
+                        <th>Updated At</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($lease->rentLogs as $rentLog)
+                        <tr>
+                            <td>{{ $rentLog->id }}</td>
+                            <td>{{ $rentLog->month }}</td>
+                            <td>{{ $rentLog->rent }}</td>
+                            <td>{{ $rentLog->fee }}</td>
+                            <td>{{ $rentLog->balance }}</td>
+                            <td>{{ $rentLog->created_at }}</td>
+                            <td>{{ $rentLog->updated_at }}</td>
+                            <td>
+                                <a href="#"><i class="fa fa-pencil"></i></a>
+                                <a href="#" class="text-success"><i class="fa fa-check"></i></a>
+                            </td>
+                        </tr>
+
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
     </div>
 @endsection
