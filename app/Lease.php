@@ -21,6 +21,41 @@ class Lease extends Model
     protected $with = ['creator', 'tenant', 'property'];
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        //
+    ];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        Lease::created(function($lease){
+            if ($lease->id) {
+                $start    = (new \DateTime($lease->start_date));
+                $end      = (new \DateTime($lease->end_date));
+                $interval = \DateInterval::createFromDateString('1 month');
+                $period   = new \DatePeriod($start, $interval, $end);
+
+                foreach ($period as $dt) {
+                    $rentLogs = new RentLog;
+                    $rentLogs->lease_id = $lease->id;
+                    $rentLogs->tenant_id = $lease->tenant_id;
+                    $rentLogs->property_id = $lease->property_id;
+                    $rentLogs->month = $dt;
+                    $rentLogs->rent = $lease->monthly_rate;
+                    $rentLogs->fee = 0;
+                    $rentLogs->balance = $lease->monthly_rate;
+                    $rentLogs->save();
+                }
+            }
+        });
+    }
+
+    /**
      * A thread belongs to a creator.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -48,5 +83,15 @@ class Lease extends Model
     public function property()
     {
         return $this->belongsTo(Property::class, 'property_id');
+    }
+
+    /**
+     * A Lease may have many rent logs.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function rentLogs()
+    {
+        return $this->hasMany(RentLog::class);
     }
 }

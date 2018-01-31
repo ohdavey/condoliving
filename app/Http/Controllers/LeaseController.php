@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Lease;
 use App\Property;
-use App\RentLog;
 use App\Tenant;
 use Illuminate\Http\Request;
 
@@ -97,29 +96,9 @@ class LeaseController extends Controller
                 'status' => 0,
                 'notes' => request('notes'),
             ]);
-
-            if ($lease->id) {
-                $start    = (new \DateTime($lease->start_date));
-                $end      = (new \DateTime($lease->end_date));
-                $interval = \DateInterval::createFromDateString('1 month');
-                $period   = new \DatePeriod($start, $interval, $end);
-
-                foreach ($period as $dt) {
-                    $rentLogs = new RentLog;
-                    $rentLogs->lease_id = $lease->id;
-                    $rentLogs->tenant_id = $lease->tenant_id;
-                    $rentLogs->property_id = $lease->property_id;
-                    $rentLogs->month = $dt;
-                    $rentLogs->rent = $lease->monthly_rate;
-                    $rentLogs->fee = 0;
-                    $rentLogs->balance = $lease->monthly_rate;
-
-                    $rentLogs->save();
-                }
-            }
         }
 
-        return view('lease.index', compact('leases'));
+        return view('lease.show', compact('lease'));
     }
 
     /**
