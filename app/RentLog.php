@@ -14,6 +14,15 @@ class RentLog extends Model
     protected $guarded = [];
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        //
+    ];
+
+    /**
      * A RentLog belongs to a tenant.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
