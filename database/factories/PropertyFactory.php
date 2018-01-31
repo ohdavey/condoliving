@@ -5,9 +5,7 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Property::class, function (Faker $faker) {
     return [
-        'owner_id' => function () {
-            return factory('App\User')->create()->id;
-        },
+        'owner_id' => 1,
         'community_id' => function () {
             return factory('App\Community')->create()->id;
         },

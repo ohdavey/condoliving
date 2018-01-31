@@ -24,7 +24,7 @@ class CreateTenantsTable extends Migration
             $table->date('dob');
             $table->float('salary', 8, 2);
             $table->timestamps();
-            $table->unique(['ssn']);
+            $table->unique(['ssn', 'email']);
         });
     }
 

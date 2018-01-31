@@ -4,9 +4,7 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Lease::class, function (Faker $faker) {
     return [
-        'creator_id' => function () {
-            return factory('App\User')->create()->id;
-        },
+        'creator_id' => 1,
         'tenant_id' => function () {
             return factory('App\Tenant')->create()->id;
         },

@@ -4,9 +4,7 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Community::class, function (Faker $faker) {
     return [
-        'owner_id' => function () {
-            return factory('App\User')->create()->id;
-        },
+        'owner_id' => 1,
 //        'category_id' => function () {
 //            return factory('App\Category')->create()->id;
 //        },
