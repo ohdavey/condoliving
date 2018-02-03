@@ -3,8 +3,8 @@
 @section('content')
     <div class="container property">
         <h2 class="page-header">
-            Lease for {{ $lease->tenant->first_name }} {{ $lease->tenant->last_name }}<span
-                    class="pull-right label label-info">{{ $lease->status }}</span>
+            Lease for {{ $lease->tenant->first_name }} {{ $lease->tenant->last_name }}
+            <span class="pull-right label label-info">{{ $lease->status }}</span>
         </h2>
 
         <div class="panel panel-default">
@@ -13,10 +13,12 @@
                     <div class="col-sm-4">
                         <div><strong>Start Date:</strong> {{ date('d-m-Y', strtotime($lease->start_date)) }}</div>
                         <div><strong>Expiration Date:</strong> {{ date('d-m-Y', strtotime($lease->end_date)) }}</div>
-                        <div><strong>Monthly Rate:</strong> ${{ $lease->monthly_rate }}</div>
-                        <div><strong>Deposit:</strong> ${{ $lease->deposit }}</div>
-                        <div><strong>Late Fee:</strong> {{ ($lease->late_fee * 100) }}%</div>
-                        <div><strong>Maintenance Fee:</strong> ${{ $lease->maintenance_fee }}</div>
+                        <?php $ordinal = new NumberFormatter('en_US', NumberFormatter::ORDINAL);?>
+                        <div><strong>Due Date:</strong> {{ $ordinal->format($lease->due_day) }} of the Month</div>
+                        <div><strong>Monthly Rate:</strong> ${{ number_format($lease->monthly_rate) }}</div>
+                        <div><strong>Deposit:</strong> ${{ number_format($lease->deposit) }}</div>
+                        <div><strong>Late Fee:</strong> {{ number_format($lease->late_fee) * 1 }}%</div>
+                        <div><strong>Maintenance Fee:</strong> ${{ number_format($lease->maintenance_fee, 2) }}</div>
                     </div>
                     <div class="col-sm-8">
                         <h3 class="panel-title">
@@ -57,11 +59,12 @@
                                 <div class="text-center"></div>
                             </div>
                             <div class="col-sm-7">
+                                <label>Name:</label> {{ $lease->tenant->first_name }} {{ $lease->tenant->last_name }}<br>
                                 <label>Identification:</label> {{ $lease->tenant->ssn }}<br>
                                 <label>Birth Date:</label> {{ date('d-m-Y', strtotime($lease->tenant->dob)) }}<br>
                                 <label>Email:</label> {{ $lease->tenant->email }}<br>
                                 <label>Phone:</label> {{ $lease->tenant->phone }}<br>
-                                <label>Salary:</label> ${{ $lease->tenant->salary}}<br>
+                                <label>Salary:</label> ${{ number_format($lease->tenant->salary) }}<br>
                                 <label>Status:</label> {{ $lease->tenant->property->statusText() }}<br>
                             </div>
 
@@ -104,7 +107,7 @@
 
                         <h3>
                             <small>Price</small>
-                            <br/><strong>${{ $lease->property->price }}</strong>
+                            <br/><strong>${{ number_format($lease->property->price, 2) }}</strong>
                             <small>/month</small>
                         </h3>
 
@@ -140,12 +143,12 @@
                     @foreach($lease->rentLogs as $rentLog)
                         <tr>
                             <td>{{ $rentLog->id }}</td>
-                            <td>{{ $rentLog->month }}</td>
-                            <td>{{ $rentLog->rent }}</td>
-                            <td>{{ $rentLog->fee }}</td>
-                            <td>{{ $rentLog->balance }}</td>
-                            <td>{{ $rentLog->created_at }}</td>
-                            <td>{{ $rentLog->updated_at }}</td>
+                            <td>{{ date('M, Y', strtotime($rentLog->month)) }}</td>
+                            <td>${{ number_format($rentLog->rent)}}</td>
+                            <td>${{ number_format($rentLog->fee, 2)}}</td>
+                            <td>${{ number_format($rentLog->balance)}}</td>
+                            <td>{{ date('m-d-Y', strtotime($rentLog->created_at)) }}</td>
+                            <td>{{ date('m-d-Y', strtotime($rentLog->updated_at)) }}</td>
                             <td>
                                 <a href="#"><i class="fa fa-pencil"></i></a>
                                 <a href="#" class="text-success"><i class="fa fa-check"></i></a>
