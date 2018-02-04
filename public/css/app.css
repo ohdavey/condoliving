@@ -48,8 +48,16 @@
   -webkit-transition: border .2s ease-in-out;
 }
 
+.communities [hidden] {
+  display: none !important;
+}
+
 .property .fa-1x {
   font-size: 1.3em;
+}
+
+.property [hidden] {
+  display: none !important;
 }
 
 /*!

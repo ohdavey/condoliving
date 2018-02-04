@@ -57,7 +57,7 @@
                                     </div>
                                 </div>
 
-                                <p class="count"> <span class="label label-info">{{ `` }}</span> Properties Available</p>
+                                <p class="count"> <span class="label label-info">{{ count($community->properties) }}</span> Properties Available</p>
                                 <p class="description">{{ $community->description }}</p>
                                 <h4 class="price">Starting At:
                                     <span>${{$community->lowestPrice()}}</span></h4>
