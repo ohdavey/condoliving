@@ -23,6 +23,7 @@ class CreateTenantsTable extends Migration
             $table->string('phone', 22);
             $table->date('dob');
             $table->float('salary', 8, 2);
+            $table->integer('status');
             $table->timestamps();
             $table->unique(['ssn', 'email']);
         });
