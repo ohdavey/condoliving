@@ -38,7 +38,8 @@ class LeaseController extends Controller
     {
         // Get all properties that are vacant/available.
         $properties = Property::where('status', '=', '0')->get(['id', 'address', 'unit', 'price']);
-        return view('lease.create', compact('properties'));
+        $tenants = Tenant::where('status', '=', '0')->get(['id', 'first_name', 'last_name']);
+        return view('lease.create', compact('properties', 'tenants'));
     }
 
     /**
@@ -56,30 +57,34 @@ class LeaseController extends Controller
             'late_fee' => 'required|regex:/^\d*(\.\d{1,2})?$/',
             'maintenance_fee' => 'required|regex:/^\d*(\.\d{1,2})?$/',
             'amenities' => 'required|regex:/([a-zA-Z0-9]+,)?[a-zA-Z0-9]+/',
-            'start_date' => 'required|date|after_or_equal:today',
+            'start_date' => 'required|date',
             'end_date' => 'required|date|after:start_date',
             'due_day' => 'required|numeric',
             'notes' => 'required|string',
-            'ssn' => 'required|unique:tenants',
-            'first_name' => 'required|string',
-            'last_name' => 'required|string',
-            'email' => 'required|email',
-            'phone' => 'required',
-            'dob' => 'required|date|before:-18year',
-            'salary' => 'required|regex:/([a-zA-Z0-9]+,)?[a-zA-Z0-9]+/',
+            'ssn' => 'required_if:tenant_id,0|unique:tenants',
+            'first_name' => 'required_if:tenant_id,0|string',
+            'last_name' => 'required_if:tenant_id,0|string',
+            'email' => 'required_if:tenant_id,0|email',
+            'phone' => 'required_if:tenant_id,0',
+            'dob' => 'required_if:tenant_id,0|date|before:-18year',
+            'salary' => 'required_if:tenant_id,0|regex:/([a-zA-Z0-9]+,)?[a-zA-Z0-9]+/',
         ]);
 
-        $tenant = new Tenant;
-
-        $tenant->property_id = $request->property_id;
-        $tenant->ssn = $request->ssn;
-        $tenant->first_name = $request->first_name;
-        $tenant->last_name = $request->last_name;
-        $tenant->email = $request->email;
-        $tenant->phone = $request->phone;
-        $tenant->dob = $request->dob;
-        $tenant->salary = $request->salary;
-
+        if (!$request->tenant_id) {
+            $tenant = new Tenant;
+            $tenant->property_id = $request->property_id;
+            $tenant->ssn = $request->ssn;
+            $tenant->first_name = $request->first_name;
+            $tenant->last_name = $request->last_name;
+            $tenant->email = $request->email;
+            $tenant->phone = $request->phone;
+            $tenant->dob = $request->dob;
+            $tenant->salary = $request->salary;
+            $tenant->status = 1;
+        }
+        else {
+            $tenant = Tenant::where(['id' => $request->tenant_id, 'status' => '0'])->firstOrFail();
+        }
         if ($tenant->save()) {
             $lease = Lease::create([
                 'creator_id' => 1,
@@ -93,7 +98,7 @@ class LeaseController extends Controller
                 'start_date' => request('start_date'),
                 'end_date' => request('end_date'),
                 'due_day' => request('due_day'),
-                'status' => 0,
+                'status' => 1,
                 'notes' => request('notes'),
             ]);
         }
