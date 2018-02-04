@@ -19,8 +19,11 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/communities', 'CommunityController@index');
+Route::get('/community/create', 'CommunityController@create');
+Route::post('/community/create', 'CommunityController@store');
 Route::get('/community/{community}', 'CommunityController@show');
 Route::get('/community/{community}/property/{property}', 'PropertyController@show');
+Route::get('/properties', 'PropertyController@index');
 Route::get('/tenants', 'TenantController@index');
 Route::get('/tenant/{tenant}', 'TenantController@show');
 Route::get('/leases', 'LeaseController@index');

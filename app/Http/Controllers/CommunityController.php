@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Community;
+use App\ImageFile;
 use Illuminate\Http\Request;
 
 class CommunityController extends Controller {
@@ -24,7 +25,7 @@ class CommunityController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        //
+        return view('communities.create');
     }
 
     /**
@@ -34,7 +35,43 @@ class CommunityController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        //
+        request()->validate([
+            'name' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'postcode' => 'required',
+            'country' => 'required',
+            'description' => 'required',
+        ]);
+        $community = Community::create([
+            'owner_id' => 1,
+            'category_id' => 4,
+            'name' => request('name'),
+            'address' => request('address'),
+            'city' => request('city'),
+            'state' => request('state'),
+            'postcode' => request('postcode'),
+            'country' => request('country'),
+            'description' => request('description'),
+        ]);
+        if($request->hasFile('images')) {
+            foreach($request->file('images') as $image) {
+                $path = public_path('/images/' . get_class($community));
+                $filename = $image->getClientOriginalName();
+                $image->move($path, $filename);
+
+                // Store in db
+                $file = new ImageFile();
+                $file->relation_id = $community->id;
+                $slug = new \ReflectionClass($community);
+                $file->relation = $slug->getShortName();
+                $file->file_path = $filename;
+
+                $file->save();
+            }
+        }
+        return view('community.show', compact('community'));
     }
 
     /**
