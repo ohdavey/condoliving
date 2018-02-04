@@ -15,8 +15,8 @@ class CreateImageFilesTable extends Migration
     {
         Schema::create('image_files', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('relation_id');
-            $table->string('relation');
+            $table->unsignedInteger('app_id');
+            $table->string('app');
             $table->string('file_path');
             $table->timestamps();
             $table->unique(['id', 'file_path']);
