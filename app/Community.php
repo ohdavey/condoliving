@@ -44,11 +44,12 @@ class Community extends Model
 
     public function lowestPrice()
     {
+        $prices = array();
         foreach ($this->properties as $property)
         {
             $prices[] = $property->price;
         }
-        return min($prices);
+        return ($prices) ? min($prices) : 0;
     }
 
     /**

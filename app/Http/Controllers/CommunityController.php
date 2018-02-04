@@ -56,22 +56,22 @@ class CommunityController extends Controller {
             'description' => request('description'),
         ]);
         if($request->hasFile('images')) {
-            foreach($request->file('images') as $image) {
-                $path = public_path('/images/' . get_class($community));
+            $slug = new \ReflectionClass($community);
+            $app = $slug->getShortName();
+            foreach ($request->file('images') as $image) {
+                $path = public_path('/images/' . $app);
                 $filename = $image->getClientOriginalName();
                 $image->move($path, $filename);
-
                 // Store in db
                 $file = new ImageFile();
-                $file->relation_id = $community->id;
-                $slug = new \ReflectionClass($community);
-                $file->relation = $slug->getShortName();
+                $file->app_id = $community->id;
+                $file->app = $app;
                 $file->file_path = $filename;
 
                 $file->save();
             }
         }
-        return view('community.show', compact('community'));
+        return redirect('/community/' . $community->id);
     }
 
     /**
