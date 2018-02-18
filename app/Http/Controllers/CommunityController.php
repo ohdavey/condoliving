@@ -7,6 +7,17 @@ use App\ImageFile;
 use Illuminate\Http\Request;
 
 class CommunityController extends Controller {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth')->except('show', 'index');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -102,7 +113,19 @@ class CommunityController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Community $community) {
-        //
+        $this->authorize('update', $community);
+
+        $community->update(request()->validate([
+            'name' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'postcode' => 'required',
+            'country' => 'required',
+            'description' => 'required',
+        ]));
+
+        return $community;
     }
 
     /**
