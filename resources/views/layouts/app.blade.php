@@ -12,12 +12,27 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!-- Scripts -->
+    <script>
+        window.App = {!! json_encode([
+            'csrfToken' => csrf_token(),
+            'user' => Auth::user(),
+            'signedIn' => Auth::check()
+        ]) !!};
+    </script>
+
+    <style>
+        [v-cloak] { display: none; }
+    </style>
 </head>
 <body>
     <div id="app">
         @include ('layouts.nav')
 
         @yield('content')
+
+        <flash message="{{ session('flash') }}"></flash>
     </div>
 
     <!-- Scripts -->

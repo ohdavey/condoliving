@@ -1,6 +1,26 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);@charset "UTF-8";
 
+.nav.admin-nav {
+  background-color: #ffffff;
+  border: 1px solid #d3e0e9;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.nav.admin-nav li {
+  float: left;
+}
+
+.nav.admin-nav li a {
+  border-right: 1px solid #d3e0e9;
+  padding: 5px 15px;
+}
+
 .communities .page-header {
+  margin-top: 10px;
+}
+
+.communities .details h2.community-title {
   margin-top: 10px;
 }
 

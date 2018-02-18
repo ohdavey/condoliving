@@ -53,14 +53,9 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Dashboard</a></li>
                             <li>
-                                <a href="">My Profile</a>
-                            </li>
-
-                            <li>
-                                <a href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                                     Logout
                                 </a>
 
@@ -71,7 +66,6 @@
                             </li>
                         </ul>
                     </li>
-
                 @endif
             </ul>
         </div>
