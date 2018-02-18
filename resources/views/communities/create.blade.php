@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Create a New Lease</div>
+                    <div class="panel-heading">Create a New Community</div>
                     <fieldset class="panel-body">
                         <form method="POST" action="/community/create" enctype="multipart/form-data">
                             {{ csrf_field() }}

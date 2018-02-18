@@ -1,0 +1,16 @@
+.nav {
+  &.admin-nav {
+    background-color: #ffffff;
+    border: 1px solid $panel-default-border;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    li {
+      float: left;
+
+      a {
+        border-right: 1px solid $panel-default-border;
+        padding: 5px 15px;
+      }
+    }
+  }
+}

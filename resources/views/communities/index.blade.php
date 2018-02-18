@@ -2,8 +2,12 @@
 
 @section('content')
     <div class="container communities">
+
         <h2 class="page-header">
             Communities
+            @if (Auth::check())
+                <small class="pull-right"><a href="/community/create"><i class="fa fa-plus-square"></i> New Community</a></small>
+            @endif
         </h2>
         <div class="row">
             @foreach ($communities as $community)
