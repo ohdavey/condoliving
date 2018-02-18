@@ -22,6 +22,7 @@ Route::get('/communities', 'CommunityController@index');
 Route::get('/community/create', 'CommunityController@create');
 Route::post('/community/create', 'CommunityController@store');
 Route::get('/community/{community}', 'CommunityController@show');
+Route::post('/community/{community}', 'CommunityController@update');
 Route::get('/community/{community}/properties', 'PropertyController@index');
 Route::get('/community/{community}/property/create', 'PropertyController@create');
 Route::get('/community/{community}/property/{property}', 'PropertyController@show');
