@@ -1,5 +1,9 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);@charset "UTF-8";
 
+h2.page-header {
+  margin-top: 20px;
+}
+
 .nav.admin-nav {
   background-color: #ffffff;
   border: 1px solid #d3e0e9;
