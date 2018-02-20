@@ -28,8 +28,8 @@
 </head>
 <body>
     <div id="app">
-        @include ('layouts.nav')
-
+        @include ('partials.nav')
+        @include('partials.breadcrumbs')
         @yield('content')
 
         <flash message="{{ session('flash') }}"></flash>

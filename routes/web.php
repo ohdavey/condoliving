@@ -18,14 +18,14 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/communities', 'CommunityController@index');
+Route::get('/communities', 'CommunityController@index')->name('communities');
 Route::get('/community/create', 'CommunityController@create');
 Route::post('/community/create', 'CommunityController@store');
-Route::get('/community/{community}', 'CommunityController@show');
+Route::get('/community/{community}', 'CommunityController@show')->name('community');
 Route::post('/community/{community}', 'CommunityController@update');
 Route::get('/community/{community}/properties', 'PropertyController@index');
 Route::get('/community/{community}/property/create', 'PropertyController@create');
-Route::get('/community/{community}/property/{property}', 'PropertyController@show');
+Route::get('/community/{community}/property/{property}', 'PropertyController@show')->name('community.property');
 Route::post('/community/{community}/property/store', 'PropertyController@store');
 Route::get('/properties', 'PropertyController@index');
 Route::get('/tenants', 'TenantController@index');
