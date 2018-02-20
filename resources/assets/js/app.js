@@ -16,6 +16,7 @@ require('./bootstrap');
 Vue.component('flash', require('./components/Flash.vue'));
 Vue.component('lease', require('./components/Lease.vue'));
 Vue.component('community', require('./components/Community.vue'));
+Vue.component('property', require('./components/Property.vue'));
 
 const app = new Vue({
     el: '#app'
