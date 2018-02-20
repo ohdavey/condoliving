@@ -10,6 +10,17 @@ use Illuminate\Http\Request;
 
 class PropertyController extends Controller
 {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth')->except('show', 'index');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -29,6 +40,7 @@ class PropertyController extends Controller
      */
     public function create(Community $community)
     {
+        $this->authorize('update', $community);
         return view('property.create', compact('community'));
     }
 
@@ -40,6 +52,7 @@ class PropertyController extends Controller
      */
     public function store(Community $community, Request $request)
     {
+        $this->authorize('update', $community);
         request()->validate([
             'address' => 'required',
             'unit' => 'required',
@@ -92,7 +105,8 @@ class PropertyController extends Controller
      * @param  \App\Property $property
      * @return \Illuminate\Http\Response
      */
-    public function show(Community $community, Property $property){
+    public function show(Community $community, Property $property)
+    {
         return view('property.show', compact('property', 'community'));
     }
 
@@ -114,9 +128,24 @@ class PropertyController extends Controller
      * @param  \App\Property $property
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Property $property)
+    public function update(Request $request, Community $community, Property $property)
     {
-        //
+        $this->authorize('update', $property);
+
+        $property->update(request()->validate([
+            'address' => 'required',
+            'unit' => 'required',
+            'beds' => 'required',
+            'baths' => 'required',
+            'sqft' => 'required',
+            'year_built' => 'required',
+            'parking' => 'required',
+            'price' => 'required',
+            'body' => 'required',
+            'type' => 'required',
+        ]));
+
+        return $property;
     }
 
     /**
