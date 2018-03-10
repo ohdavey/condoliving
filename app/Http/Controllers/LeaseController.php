@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Lease;
 use App\Property;
-use App\Tenant;
+use App\Community;
 use Illuminate\Http\Request;
 
 class LeaseController extends Controller
@@ -34,12 +34,19 @@ class LeaseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Community $community, Property $property)
     {
-        // Get all properties that are vacant/available.
-        $properties = Property::where('status', '=', '0')->get(['id', 'address', 'unit', 'price']);
-        $tenants = Tenant::where('status', '=', '0')->get(['id', 'first_name', 'last_name']);
-        return view('lease.create', compact('properties', 'tenants'));
+        $this->authorize('update', $community);
+
+        $preselected = false;
+        if (isset($property)) {
+            $properties = Property::where(['id' => $property->id, 'status' => '0', 'owner_id' => auth()->id()])->get(['id', 'address', 'unit', 'price']);
+            $preselected = true;
+        } else {
+            // Get all properties that are vacant/available.
+            $properties = Property::where(['status' => '0', 'owner_id' => auth()->id()])->get(['id', 'address', 'unit', 'price']);
+        }
+        return view('lease.create', compact('properties','preselected'));
     }
 
     /**
@@ -87,7 +94,7 @@ class LeaseController extends Controller
         }
         if ($tenant->save()) {
             $lease = Lease::create([
-                'creator_id' => 1,
+                'creator_id' => auth()->id(),
                 'property_id' => request('property_id'),
                 'tenant_id' => $tenant->id,
                 'deposit' => request('deposit'),
