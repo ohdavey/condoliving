@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Tenant;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class TenantController extends Controller
 {
@@ -49,6 +50,33 @@ class TenantController extends Controller
     public function show(Tenant $tenant)
     {
         //
+    }
+
+    /**
+     * Look up a tenant by SSN.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function lookUpTenant(Request $request)
+    {
+        if ($request->ssnumber) {
+            try {
+                $tenant = Tenant::where(['ssn' => $request->ssnumber])->firstOrFail();
+                $response = array(
+                    'status' => 'success',
+                    'msg'    => 'We found a record with the SSN provided.',
+                    'tenant' => $tenant
+                );
+                return \Response::json($response);
+            } catch (ModelNotFoundException $ex) {
+                $response = array(
+                    'status' => 'error',
+                    'msg'    => 'Not found',
+                );
+                return \Response::json($response);
+            }
+        }
     }
 
     /**

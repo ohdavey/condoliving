@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container property">
+    <div class="container lease">
         <h2 class="page-header">
             Lease for {{ $lease->tenant->first_name }} {{ $lease->tenant->last_name }}
             <span class="pull-right label label-info">{{ $lease->status }}</span>
