@@ -18,3 +18,17 @@ h2.page-header {
     }
   }
 }
+
+.alert {
+  &.alert-sm {
+    padding: 5px 10px;
+    margin-bottom: 0;
+  }
+}
+
+form {
+  .form-control[readonly] {
+    background-color: #fbfbfb;
+    cursor: not-allowed;
+  }
+}
