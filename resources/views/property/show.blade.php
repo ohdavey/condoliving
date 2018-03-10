@@ -10,6 +10,7 @@
                         <li><a @click="editing = true">Edit</a></li>
                         <li><a href="#">Delete</a></li>
                         <li><a href="{{ $property->path() }}/property/create">Add Property</a></li>
+                        <li><a href="{{ $property->path() }}/lease/create?property={{ $property->id}}">New Lease<b>+</b></a></li>
                     </ul>
                     <div v-if="editing" class="pull-right">
                         <button class="btn btn-xs btn-primary" @click="update">Update</button>

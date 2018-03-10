@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@section ('head')
-    <script src='https://www.google.com/recaptcha/api.js'></script>
-@endsection
-
 @section('content')
     <div class="container property">
         <div class="row">
