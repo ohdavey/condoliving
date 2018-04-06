@@ -60,9 +60,9 @@ class TenantController extends Controller
      */
     public function lookUpTenant(Request $request)
     {
-        if ($request->ssnumber) {
+        if ($request->pid) {
             try {
-                $tenant = Tenant::where(['ssn' => $request->ssnumber])->firstOrFail();
+                $tenant = Tenant::where(['personal_id' => $request->pid])->firstOrFail();
                 $response = array(
                     'status' => 'success',
                     'msg'    => 'We found a record with the SSN provided.',
