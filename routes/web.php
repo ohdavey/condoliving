@@ -31,4 +31,4 @@ Route::post('/tenants/lookup', 'TenantController@lookUpTenant');
 Route::get('/leases', 'LeaseController@index');
 Route::get('/lease/create', 'LeaseController@create');
 Route::post('/lease', 'LeaseController@store');
-Route::get('/lease/{lease}', 'LeaseController@show');
+Route::get('/lease/{lease}', 'LeaseController@show')->name('lease.show');
