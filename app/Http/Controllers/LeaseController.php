@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Lease;
 use App\Property;
 use App\Tenant;
+use App\Community;
 use Illuminate\Http\Request;
 
 class LeaseController extends Controller
@@ -14,7 +15,7 @@ class LeaseController extends Controller
      */
     public function __construct()
     {
-//        $this->middleware('auth');
+        $this->middleware('auth');
     }
 
     /**
@@ -34,12 +35,19 @@ class LeaseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Community $community, Property $property)
     {
-        // Get all properties that are vacant/available.
-        $properties = Property::where('status', '=', '0')->get(['id', 'address', 'unit', 'price']);
-        $tenants = Tenant::where('status', '=', '0')->get(['id', 'first_name', 'last_name']);
-        return view('lease.create', compact('properties', 'tenants'));
+        $this->authorize('update', $community);
+
+        $preselected = false;
+        if (isset($property)) {
+            $properties = Property::where(['id' => $property->id, 'status' => '0', 'owner_id' => auth()->id()])->get(['id', 'address', 'unit', 'price']);
+            $preselected = true;
+        } else {
+            // Get all properties that are vacant/available.
+            $properties = Property::where(['status' => '0', 'owner_id' => auth()->id()])->get(['id', 'address', 'unit', 'price']);
+        }
+        return view('lease.create', compact('properties','preselected'));
     }
 
     /**
@@ -50,44 +58,28 @@ class LeaseController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate([
-            'property_id' => 'required|numeric',
-            'deposit' => 'required|regex:/^\d*(\.\d{1,2})?$/',
-            'monthly_rate' => 'required|regex:/^\d*(\.\d{1,2})?$/',
-            'late_fee' => 'required|regex:/^\d*(\.\d{1,2})?$/',
-            'maintenance_fee' => 'required|regex:/^\d*(\.\d{1,2})?$/',
-            'amenities' => 'required|regex:/([a-zA-Z0-9]+,)?[a-zA-Z0-9]+/',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after:start_date',
-            'due_day' => 'required|numeric',
-            'notes' => 'required|string',
-            'ssn' => 'required_if:tenant_id,0|unique:tenants',
-            'first_name' => 'required_if:tenant_id,0|string',
-            'last_name' => 'required_if:tenant_id,0|string',
-            'email' => 'required_if:tenant_id,0|email',
-            'phone' => 'required_if:tenant_id,0',
-            'dob' => 'required_if:tenant_id,0|date|before:-18year',
-            'salary' => 'required_if:tenant_id,0|regex:/([a-zA-Z0-9]+,)?[a-zA-Z0-9]+/',
-        ]);
+        $lease = new Lease;
+        request()->validate($lease->rules());
 
         if (!$request->tenant_id) {
+            request()->validate(['personal_id' => 'unique:tenants']);
             $tenant = new Tenant;
-            $tenant->property_id = $request->property_id;
-            $tenant->ssn = $request->ssn;
-            $tenant->first_name = $request->first_name;
-            $tenant->last_name = $request->last_name;
-            $tenant->email = $request->email;
-            $tenant->phone = $request->phone;
-            $tenant->dob = $request->dob;
-            $tenant->salary = $request->salary;
-            $tenant->status = 1;
         }
         else {
-            $tenant = Tenant::where(['id' => $request->tenant_id, 'status' => '0'])->firstOrFail();
+            $tenant = Tenant::where(['id' => $request->tenant_id])->firstOrFail();
         }
+        $tenant->property_id = $request->property_id;
+        $tenant->personal_id = $request->personal_id;
+        $tenant->first_name = $request->first_name;
+        $tenant->last_name = $request->last_name;
+        $tenant->email = $request->email;
+        $tenant->phone = $request->phone;
+        $tenant->dob = $request->dob;
+        $tenant->salary = $request->salary;
+        $tenant->status = 1;
         if ($tenant->save()) {
-            $lease = Lease::create([
-                'creator_id' => 1,
+            $lease->create([
+                'creator_id' => auth()->id(),
                 'property_id' => request('property_id'),
                 'tenant_id' => $tenant->id,
                 'deposit' => request('deposit'),
@@ -101,9 +93,17 @@ class LeaseController extends Controller
                 'status' => 1,
                 'notes' => request('notes'),
             ]);
-        }
 
-        return view('lease.show', compact('lease'));
+            $property = Property::find($request->property_id);
+            $property->status = 1;
+            $property->save();
+        }
+        $response = array(
+            'status' => 'success',
+            'msg'    => 'Lease Created Successfully.',
+            'lease' => $lease->id
+        );
+        return \Response::json($response);
     }
 
     /**
@@ -114,6 +114,7 @@ class LeaseController extends Controller
      */
     public function show(Lease $lease)
     {
+        $this->authorize('update', $lease);
         return view('lease.show', compact('lease'));
     }
 

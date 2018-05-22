@@ -7,7 +7,7 @@ $factory->define(App\Tenant::class, function (Faker $faker) {
         'property_id' => function () {
             return factory('App\Property')->create()->id;
         },
-        'ssn' => substr($faker->uuid, 4 , 12),
+        'personal_id' => substr($faker->uuid, 4 , 12),
         'first_name' => $faker->firstName,
         'last_name' => $faker->lastName,
         'email' => $faker->email,

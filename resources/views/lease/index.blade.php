@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container communities">
+    <div class="container leases">
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
@@ -17,28 +17,34 @@
                                     <thead>
                                     <tr>
                                         <th>#</th>
+                                        <th>Tenant</th>
+                                        <th>Property</th>
                                         <th>Deposit</th>
                                         <th>Monthly Rate</th>
                                         <th>Late Fee</th>
-                                        <th>Mnt Fee</th>
-                                        <th>Amenities</th>
-                                        <th>Start Date</th>
-                                        <th>Expiration Date</th>
+                                        <th>Mnt. Fee</th>
+                                        <th>Term Dates</th>
                                         <th>Status</th>
+                                        <th>Actions</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     @foreach($leases as $lease)
                                         <tr>
-                                            <td>{{ $lease->id }}</td>
-                                            <td>{{ $lease->deposit }}</td>
-                                            <td>{{ $lease->monthly_rate }}</td>
-                                            <td>{{ $lease->late_fee }}</td>
-                                            <td>{{ $lease->maintenance_fee }}</td>
-                                            <td>{{ $lease->amenities }}</td>
-                                            <td>{{ $lease->start_date }}</td>
-                                            <td>{{ $lease->end_date }}</td>
-                                            <td>{{ $lease->status }}</td>
+                                            <td><a href="{{ $lease->path() }}">{{ $lease->id }}</a></td>
+                                            <td><a href="{{ $lease->tenant->path() }}">{{ $lease->tenant->first_name }} {{ $lease->tenant->last_name }}</a></td>
+                                            <td><a href="{{ $lease->property->path() }}">{{ $lease->property->address }}</a></td>
+                                            <td>${{ number_format($lease->deposit) }}</td>
+                                            <td>${{ number_format($lease->monthly_rate) }}</td>
+                                            <td>${{ number_format($lease->maintenance_fee) }}</td>
+                                            <td>{{ number_format($lease->late_fee) * 1 }}%</td>
+                                            <td>{{ date('d-m-Y', strtotime($lease->start_date)) }} - {{ date('d-m-Y', strtotime($lease->end_date)) }}</td>
+                                            <td>{{ $lease->statusText() }}</td>
+                                            <td>
+                                                <a href="{{ $lease->path() }}"><i class="fa fa-fw fa-eye"></i></a>
+                                                <a href="{{ $lease->path() }}"><i class="fa fa-fw fa-pencil-square-o text-warning"></i></a>
+                                                <a href="{{ $lease->path() }}"><i class="fa fa-fw fa-times text-danger"></i></a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                     </tbody>

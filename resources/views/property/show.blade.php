@@ -9,7 +9,11 @@
                     <ul class="nav admin-nav pull-left">
                         <li><a @click="editing = true">Edit</a></li>
                         <li><a href="#">Delete</a></li>
-                        <li><a href="{{ $property->path() }}/property/create">Add Property</a></li>
+                        @if ($property->lease && $property->lease->status)
+                            <li><a href="{{ $property->lease->path() }}">Lease</a></li>
+                        @else
+                            <li><a href="{{ $property->path() }}/lease/create?property={{ $property->id }}">New Lease<b>+</b></a></li>
+                        @endif
                     </ul>
                     <div v-if="editing" class="pull-right">
                         <button class="btn btn-xs btn-primary" @click="update">Update</button>
@@ -20,7 +24,10 @@
             <h2 class="page-header" v-if="editing">
                 <input class="form-control" name="address" v-model="address">
             </h2>
-            <h2 v-else v-text="address" class="page-header"></h2>
+            <h2 v-else class="page-header">
+                <span v-text="address"></span>
+                <small class="label label-info pull-right">{{ $property->statusText() }}</small>
+            </h2>
 
             <div class="row">
                 <div class="col-md-7">

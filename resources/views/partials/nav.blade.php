@@ -33,10 +33,6 @@
 
                     </ul>
                 </li>
-                @if (auth()->check())
-                    <li><a href="/lease/create">New Lease<b>+</b></a></li>
-                @endif
-
             </ul>
 
             <!-- Right Side Of Navbar -->

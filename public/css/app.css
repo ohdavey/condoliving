@@ -20,6 +20,16 @@ h2.page-header {
   padding: 5px 15px;
 }
 
+.alert.alert-sm {
+  padding: 5px 10px;
+  margin-bottom: 0;
+}
+
+form .form-control[readonly] {
+  background-color: #fbfbfb;
+  cursor: not-allowed;
+}
+
 .communities .page-header {
   margin-top: 10px;
 }

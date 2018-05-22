@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Lease extends Model
 {
+    const STATUS_VACANT     = 0;
+    const STATUS_RENTED     = 1;
+    const STATUS_DEFAULT    = 2;
+    const STATUS_EVICTION   = 3;
     /**
      * Don't auto-apply mass assignment protection.
      *
@@ -28,6 +32,50 @@ class Lease extends Model
     protected $fillable = [
         //
     ];
+
+    public function statusOptions()
+    {
+        return array(
+            self::STATUS_VACANT   => 'Vacant',
+            self::STATUS_RENTED   => 'Rented',
+            self::STATUS_DEFAULT  => 'Default',
+            self::STATUS_EVICTION => 'Eviction',
+        );
+    }
+
+    public function statusText()
+    {
+        $options = $this->statusOptions();
+        return isset( $options[$this->status]) ? $options[$this->status] : "unknown ({$this->status})";
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            'property_id' => 'required|numeric',
+            'deposit' => 'required|regex:/^\d*(\.\d{1,2})?$/',
+            'monthly_rate' => 'required|regex:/^\d*(\.\d{1,2})?$/',
+            'late_fee' => 'required|regex:/^\d*(\.\d{1,2})?$/',
+            'maintenance_fee' => 'required|regex:/^\d*(\.\d{1,2})?$/',
+            'amenities' => 'required|regex:/([a-zA-Z0-9]+,)?[a-zA-Z0-9]+/',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after:start_date',
+            'due_day' => 'required|numeric',
+            'notes' => 'required|string',
+            'personal_id' => 'required_if:tenant_id,0',
+            'first_name' => 'required_if:tenant_id,0|string',
+            'last_name' => 'required_if:tenant_id,0|string',
+            'email' => 'required_if:tenant_id,0|email',
+            'phone' => 'required_if:tenant_id,0',
+            'dob' => 'required_if:tenant_id,0|date|before:-18year',
+            'salary' => 'required_if:tenant_id,0|regex:/([a-zA-Z0-9]+,)?[a-zA-Z0-9]+/',
+        ];
+    }
 
     public static function boot()
     {
@@ -53,6 +101,16 @@ class Lease extends Model
                 }
             }
         });
+    }
+
+    /**
+     * Get a string path for the thread.
+     *
+     * @return string
+     */
+    public function path()
+    {
+        return "/lease/{$this->id}";
     }
 
     /**

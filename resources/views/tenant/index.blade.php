@@ -29,14 +29,18 @@
                                     <tbody>
                                     @foreach($tenants as $tenant)
                                         <tr>
-                                            <td>{{ $tenant->id }}</td>
-                                            <td>{{ $tenant->first_name }} {{ $tenant->last_name }}</td>
+                                            <td><a href="{{ $tenant->path() }}">{{ $tenant->id }}</a></td>
+                                            <td><a href="{{ $tenant->path() }}">{{ $tenant->first_name }} {{ $tenant->last_name }}</a></td>
                                             <td>{{ $tenant->email }}</td>
                                             <td>{{ $tenant->phone }}</td>
-                                            <td>{{ $tenant->lease->id}}</td>
-                                            <td>{{ $tenant->property->id }}</td>
+                                            <td><a href="{{ $tenant->lease->path() }}">{{ $tenant->lease->id}}</a></td>
+                                            <td><a href="{{ $tenant->property->path() }}">{{ $tenant->property->address }}</a></td>
                                             <td>{{ $tenant->property->statusText() }}</td>
-                                            <td>{{ $tenant->id }}</td>
+                                            <td>
+                                                <a href="{{ $tenant->path() }}"><i class="fa fa-fw fa-eye"></i></a>
+                                                <a href="{{ $tenant->path() }}"><i class="fa fa-fw fa-pencil-square-o text-warning"></i></a>
+                                                <a href="{{ $tenant->path() }}"><i class="fa fa-fw fa-times text-danger"></i></a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                     </tbody>
