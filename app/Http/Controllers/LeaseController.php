@@ -62,20 +62,21 @@ class LeaseController extends Controller
         request()->validate($lease->rules());
 
         if (!$request->tenant_id) {
+            request()->validate(['personal_id' => 'unique:tenants']);
             $tenant = new Tenant;
-            $tenant->property_id = $request->property_id;
-            $tenant->personal_id = $request->personal_id;
-            $tenant->first_name = $request->first_name;
-            $tenant->last_name = $request->last_name;
-            $tenant->email = $request->email;
-            $tenant->phone = $request->phone;
-            $tenant->dob = $request->dob;
-            $tenant->salary = $request->salary;
-            $tenant->status = 1;
         }
         else {
-            $tenant = Tenant::where(['id' => $request->tenant_id, 'status' => '0'])->firstOrFail();
+            $tenant = Tenant::where(['id' => $request->tenant_id])->firstOrFail();
         }
+        $tenant->property_id = $request->property_id;
+        $tenant->personal_id = $request->personal_id;
+        $tenant->first_name = $request->first_name;
+        $tenant->last_name = $request->last_name;
+        $tenant->email = $request->email;
+        $tenant->phone = $request->phone;
+        $tenant->dob = $request->dob;
+        $tenant->salary = $request->salary;
+        $tenant->status = 1;
         if ($tenant->save()) {
             $lease->create([
                 'creator_id' => auth()->id(),
@@ -97,8 +98,12 @@ class LeaseController extends Controller
             $property->status = 1;
             $property->save();
         }
-
-        return view('lease.show', compact('lease'));
+        $response = array(
+            'status' => 'success',
+            'msg'    => 'Lease Created Successfully.',
+            'lease' => $lease->id
+        );
+        return \Response::json($response);
     }
 
     /**
