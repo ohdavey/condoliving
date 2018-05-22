@@ -46,6 +46,11 @@ class Property extends Model
         return $this->belongsTo(User::class, 'owner_id');
     }
 
+    /**
+     * Get a string path for the thread.
+     *
+     * @return string
+     */
     public function path()
     {
         return "/community/{$this->community_id}/property/{$this->id}";
