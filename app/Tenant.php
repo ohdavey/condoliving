@@ -62,6 +62,20 @@ class Tenant extends Model
         return $this->hasMany(Payment::class);
     }
 
+    /**
+     * Get a string path for the thread.
+     *
+     * @return string
+     */
+    public function path()
+    {
+        return "/tenant/{$this->id}";
+    }
+
+    /**
+     * Return lowest price
+     * @return int
+     */
     public function lowestPrice()
     {
         foreach ($this->properties as $property)
@@ -72,7 +86,7 @@ class Tenant extends Model
     }
 
     /**
-     * A Tenant may have many payments.
+     * Return friendly readable status.
      *
      * @return string
      */
